@@ -1,0 +1,69 @@
+Steps to create Pyspark Enviornment with Jupyter Notebook
+
+
+Rough Steps for my refrence purpose
+
+1. Setting up Anaconda 3+
+
+cp ~/Downloads/Anaconda3-4.0.0-Linux-x86_64.sh ~/
+chmod +x Anaconda3-4.0.0-Linux-x86_64.sh 
+
+Run 
+./Anaconda3-4.0.0-Linux-x86_64.sh
+
+
+Press Enter when asked for. 
+Type Yes when asked for.
+
+
+2. Once the installation is done , type the below 
+
+source .bashrc
+
+jupyter notebook
+
+3. Creating a virtual private environment using conda
+
+Conda
+http://bit.ly/condaquickinstall
+Download the required version for your OS .
+
+wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
+
+chmod +x Miniconda-latest-MacOSX-x86_64.sh
+
+# Agree to licenses
+./Miniconda-latest-MacOSX-x86_64.sh
+
+source ~/.bashrc
+Create the environment of your choice. Python2 / Python3 / R
+conda update conda -y
+
+# Python 2
+conda create -n py2 python=2 anaconda jupyter notebook -y 
+
+# Python 3
+conda create -n py3 python=3 anaconda jupyter notebook -y 
+
+# Install R
+conda create -n jupyter_r -c r r-irkernel r-essentials r-recommended rpy2 -y
+source activate jupyter_r
+source deactivate
+
+conda env list
+Calling Jupyter notebook with Spark configured.
+Download Spark .
+
+4. From Spark directory call the below:
+
+Calling Ipython notebook
+
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook " bin/spark/bin/pyspark
+
+For using Python 3 try the below.
+
+PYSPARK_PYTHON=python3 PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook " bin/spark/bin/pyspark
+Adding Library to PySpark
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook " bin/spark/bin/pyspark --packages com.databricks:spark-csv_2.11:1.4.0
+
+CSV READER IS ADDED. If you want other packages from maven repository , you can include them after packages.
